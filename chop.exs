@@ -1,12 +1,10 @@
 defmodule Chop do
   def guess(actual, actual..actual), do: actual
-  def guess(actual, range) do
-    maybe = halfway(range)
+  def guess(actual, low..high) do
+    maybe = div(high-low, 2) + low
     IO.puts("Is it #{maybe}")
-    guess(actual, attempt(actual, maybe, range))
+    guess(actual, attempt(actual, maybe, low..high))
   end
-
-  def halfway(low..high), do: div(high-low, 2) + low
 
   def attempt(actual, guess, low.._) when actual < guess do
     low..guess
